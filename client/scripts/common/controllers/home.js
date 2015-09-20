@@ -10,7 +10,14 @@ module.exports = function(app) {
     function controller() {
         var vm = this;
         vm.controllername = fullname;
-        vm.message = 'Hello World';
+        switch (vm.controllername) {
+            case 'main.common.home':
+                vm.message = 'Hello World 1';
+                break;
+            default:
+                vm.message = 'Hello World 1';
+        }
+
         vm.add = function(a, b) {
             return a + b;
         };
