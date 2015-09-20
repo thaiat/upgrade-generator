@@ -108,7 +108,7 @@
     "node-sass": "3.3.3",
     "phantomjs": "1.9.18",
     "protractor": "2.1.0",
-    "protractor-html-screenshot-reporter": "git://github.com/mping/protractor-html-screenshot-reporter.git#b286b684c6ffa2423b35c61c1d6196502e88f47a",
+    "protractor-jasmine2-screenshot-reporter": "0.1.7",
     "q": "1.4.1",
     "require-dir": "0.3.0",
     "run-sequence": "1.1.1",
