@@ -5,13 +5,10 @@ var runSequence = require('run-sequence');
 var $ = require('gulp-load-plugins')();
 var mocha = $.mocha;
 var istanbul = $.istanbul;
-var karma = $.karma;
 var browserSync = require('browser-sync').create();
 var bs = browserSync;
 //var plumber = $.plumber;
 var gmux = require('gulp-mux');
-var gutil = require('gulp-util');
-var chalk = require('chalk');
 var args = require('yargs').argv;
 
 var constants = require('../common/constants')();
@@ -41,18 +38,15 @@ gulp.task('mocha', 'Runs mocha unit tests.', function(done) {
         });
 });
 
-gulp.task('karma', 'Runs karma unit tests.', function() {
-    // passing the args to karma
-    process.env.ARGS = JSON.stringify(args);
-    return gulp.src(['no need to supply files because everything is in config file'])
-        .pipe(karma({
-            configFile: 'karma.conf.js',
-            action: args.start ? 'start' : 'run',
-            autowatch: !args.start,
-            debug: args.debug
-        })).on('error', function() {
-            gutil.log(chalk.red('(ERROR)'), 'karma');
-        });
+gulp.task('karma', 'Runs karma unit tests.', function(done) {
+    var path = require('path');
+    var Server = require('karma').Server;
+    new Server({
+        configFile: path.resolve('karma.conf.js'),
+        singleRun: true,
+        action: args.start ? 'start' : 'run',
+        autowatch: !args.start
+    }, done).start();
 });
 
 gulp.task('unit', 'Runs all unit tests.', function(done) {
